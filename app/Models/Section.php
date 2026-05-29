@@ -1,32 +1,10 @@
 <?php
-
 namespace App\Models;
-
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Section extends Model
-{
-    protected $fillable = [
-        'course_id',
-        'title',
-        'order',
-    ];
-
-    /**
-     * Section milik satu Course
-     */
-    public function course(): BelongsTo
-    {
-        return $this->belongsTo(Course::class);
-    }
-
-    /**
-     * Satu Section punya banyak Lesson
-     */
-    public function lessons(): HasMany
-    {
-        return $this->hasMany(Lesson::class)->orderBy('order');
-    }
+class Section extends Model {
+    protected $fillable = ['course_id', 'title', 'order'];
+    public function course()  { return $this->belongsTo(Course::class); }
+    public function lessons() { return $this->hasMany(Lesson::class)->orderBy('order'); }
+    public function totalDuration(): int { return $this->lessons->sum('duration_seconds'); }
 }

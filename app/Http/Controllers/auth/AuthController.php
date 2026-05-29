@@ -1,66 +1,59 @@
 <?php
-
-namespace App\Http\Controllers\auth;
+namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function showRegister() { return view('auth.register'); }
+
+    public function register(Request $request)
     {
-        //
-        return view('auth.login');
+        $data = $request->validate([
+            'name'     => 'required|string|max:255',
+            'email'    => 'required|email|unique:users',
+            'password' => 'required|min:8|confirmed',
+        ], [
+            'name.required'      => 'Nama wajib diisi.',
+            'email.required'     => 'Email wajib diisi.',
+            'email.unique'       => 'Email sudah terdaftar.',
+            'password.min'       => 'Password minimal 8 karakter.',
+            'password.confirmed' => 'Konfirmasi password tidak cocok.',
+        ]);
+
+        $user = User::create([
+            'name'     => $data['name'],
+            'email'    => $data['email'],
+            'password' => Hash::make($data['password']),
+            'role'     => 'user',
+        ]);
+
+        Auth::login($user);
+        return redirect()->route('dashboard')->with('success', "Selamat datang, {$user->name}! 🎉");
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function register()
-    {
-        return view('auth.register');
-    }
+    public function showLogin() { return view('auth.login'); }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function login(Request $request)
     {
-        //
-    }
+        $data = $request->validate([
+            'email'    => 'required|email',
+            'password' => 'required',
+        ]);
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
+        if (Auth::attempt(['email' => $data['email'], 'password' => $data['password']], $request->boolean('remember'))) {
+            $request->session()->regenerate();
+            $user = Auth::user();
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
+            if ($user->isAdmin())      return redirect()->route('admin.dashboard');
+            if ($user->isInstructor()) return redirect()->route('instructor.dashboard');
+            return redirect()->intended(route('dashboard'));
+        }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        return back()->withErrors(['email' => 'Email atau password salah.'])->onlyInput('email');
     }
 }

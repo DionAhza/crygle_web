@@ -1,14 +1,12 @@
 <?php
+// database/migrations/0001_01_01_000000_create_users_table.php
+// REPLACE the existing one with this version
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
-    /**
-     * Run the migrations.
-     */
+return new class extends Migration {
     public function up(): void
     {
         Schema::create('users', function (Blueprint $table) {
@@ -17,6 +15,10 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->enum('role', ['user', 'instructor', 'admin'])->default('user');
+            $table->string('avatar')->nullable();
+            $table->text('bio')->nullable();
+            $table->string('headline')->nullable(); // "Full-stack Developer & Educator"
             $table->rememberToken();
             $table->timestamps();
         });
@@ -36,10 +38,6 @@ return new class extends Migration
             $table->integer('last_activity')->index();
         });
     }
-
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('users');
