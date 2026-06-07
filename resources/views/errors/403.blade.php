@@ -1,14 +1,12 @@
 @extends('layouts.app')
-@section('title', '403 — Akses Ditolak')
+@section('title','403 — Akses Ditolak')
 @section('content')
-<div class="min-h-[60vh] flex items-center justify-center px-4">
-  <div class="text-center max-w-md">
-    <p class="text-8xl font-black text-red-100 mb-2 select-none">403</p>
-    <h1 class="text-2xl font-bold text-slate-800 mb-2">Akses Ditolak</h1>
-    <p class="text-slate-500 text-sm mb-8">Kamu tidak memiliki izin untuk mengakses halaman ini.</p>
-    <div class="flex flex-wrap justify-center gap-3">
-      <a href="{{ route('home') }}" class="bg-blue-700 hover:bg-blue-800 text-white font-semibold px-6 py-3 rounded-full transition text-sm">Kembali ke Beranda</a>
-    </div>
+<div style="min-height:65vh;display:flex;align-items:center;justify-content:center;padding:3rem 1.5rem;text-align:center;">
+  <div>
+    <p style="font-size:7rem;font-weight:900;color:#FEF2F2;line-height:1;margin-bottom:.5rem;letter-spacing:-4px;">403</p>
+    <h1 style="font-size:1.5rem;font-weight:800;color:#1A1A2E;margin-bottom:.75rem;">Akses Ditolak</h1>
+    <p style="color:#6B7280;font-size:.9rem;margin-bottom:2rem;">Kamu tidak memiliki izin untuk mengakses halaman ini.</p>
+    <a href="{{ route('home') }}" style="background:#1B4F9B;color:#fff;font-weight:700;padding:.875rem 2rem;border-radius:50px;text-decoration:none;font-size:.875rem;">Kembali ke Beranda</a>
   </div>
 </div>
 @endsection

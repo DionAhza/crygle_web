@@ -33,7 +33,7 @@
   {{-- Course list --}}
   <div class="flex items-center justify-between mb-6">
     <h2 class="text-xl font-bold text-slate-900">📚 Course Saya</h2>
-    <a href="{{ route('courses.index') }}" class="text-blue-600 font-semibold text-sm hover:underline">+ Tambah Course</a>
+    <a href="{{ route('courses  .index') }}" class="text-blue-600 font-semibold text-sm hover:underline">+ Tambah Course</a>
   </div>
 
   @if($enrollments->isEmpty())

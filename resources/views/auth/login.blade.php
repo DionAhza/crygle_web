@@ -44,13 +44,22 @@
                 Silahkan Login dan Masukin Akun Kamu
             </p>
 
+            @if($errors->any())
+      <div style="background:#FEF2F2; border:1px solid #FECACA; border-radius:10px; padding:.875rem 1rem; margin-bottom:1.25rem;">
+        @foreach($errors->all() as $e)
+        <p style="color:#DC2626; font-size:.85rem; display:flex; align-items:center; gap:.5rem;">
+          <i class="bi-exclamation-circle"></i> {{ $e }}
+        </p>
+        @endforeach
+      </div>
+      @endif
             <!-- FORM -->
-            <form class="space-y-5">
+            <form class="space-y-5" method="POST" action="{{ route('login.post') }}">
 
                 <!-- EMAIL -->
                 <div>
                     <label class="text-sm text-gray-600 mb-1 block">Email Address</label>
-                    <input type="email"
+                    <input type="email" name="email"
                         class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
                         placeholder="Masukkan email">
                 </div>
@@ -59,6 +68,7 @@
                 <div>
                     <label class="text-sm text-gray-600 mb-1 block">Password</label>
                     <input type="password"
+                    name="password"
                         class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
                         placeholder="Masukkan password">
                 </div>
@@ -77,6 +87,7 @@
 
                 <!-- BUTTON -->
                 <button
+                type="submit"
                     class="w-full bg-blue-700 hover:bg-blue-800 text-white py-3 rounded-full font-semibold transition">
                     Login
                 </button>
@@ -86,7 +97,7 @@
             <!-- REGISTER -->
             <p class="text-center text-sm text-gray-500 mt-6">
                 Apakah kamu belum memiliki akun?
-                <a href="/register" class="text-blue-600 font-semibold hover:underline">
+                <a href="{{ route('register') }}" class="text-blue-600 font-semibold hover:underline">
                     Buat Akun
                 </a>
             </p>

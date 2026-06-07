@@ -674,177 +674,69 @@ if(current < 0) current = testimonials.length - 1;
 showTestimonial(current);
 }
 </script>
-<section class="bg-[#EEF1F4] px-6 lg:px-20 py-24">
-    <div class="max-w-6xl mx-auto">
-
-        <!-- TITLE -->
-        <div class="text-center mb-14">
-            <h2 class="text-4xl lg:text-5xl font-bold text-blue-900 mb-3">
-                Frequently Asked Questions
-            </h2>
-            <p class="text-gray-500 text-lg">
-                Masih bingung? Kami bantu jawab di sini.
-            </p>
-        </div>
-
-
-        <!-- FAQ GRID -->
-        <div class="grid md:grid-cols-2 gap-6">
-
-            <!-- LEFT -->
-            <div class="space-y-4">
-
-                <!-- Open -->
-                <div class="rounded-xl overflow-hidden shadow-sm">
-                    <button onclick="toggleFaq(this)"
-                        class="faq-btn w-full bg-blue-800 text-white px-6 py-4 flex justify-between items-center text-left font-semibold">
-                        Apakah Crygle Academy cocok untuk pemula?
-                        <span class="faq-icon rotate-180">⌄</span>
-                    </button>
-
-                    <div class="faq-content bg-white px-6 py-5 block">
-                        <p class="text-gray-600 leading-relaxed">
-                            Sangat cocok, CRYGLE Academy dirancang khusus untuk pemula dari tingkat SD hingga SMK.
-                            Materi disusun secara bertahap dari dasar hingga lanjutan dengan penjelasan yang mudah dipahami.
-                        </p>
-                    </div>
-                </div>
-
-
-                <div class="rounded-xl overflow-hidden shadow-sm">
-                    <button onclick="toggleFaq(this)"
-                        class="faq-btn w-full bg-blue-800 text-white px-6 py-4 flex justify-between items-center text-left font-semibold">
-                        Saya belum pernah belajar coding, robotik dan desain, apakah bisa ikut?
-                        <span class="faq-icon">⌄</span>
-                    </button>
-
-                    <div class="faq-content hidden bg-white px-6 py-5">
-                        <p class="text-gray-600">
-                            Tentu bisa. Semua kelas dimulai dari dasar.
-                        </p>
-                    </div>
-                </div>
-
-
-                <div class="rounded-xl overflow-hidden shadow-sm">
-                    <button onclick="toggleFaq(this)"
-                        class="faq-btn w-full bg-blue-800 text-white px-6 py-4 flex justify-between items-center text-left font-semibold">
-                        Apa saja yang bisa saya pelajari di CRYGLE Academy?
-                        <span class="faq-icon">⌄</span>
-                    </button>
-
-                    <div class="faq-content hidden bg-white px-6 py-5">
-                        <p class="text-gray-600">
-                            Creative Design, Coding, Robotics dan lainnya.
-                        </p>
-                    </div>
-                </div>
-
-
-                <div class="rounded-xl overflow-hidden shadow-sm">
-                    <button onclick="toggleFaq(this)"
-                        class="faq-btn w-full bg-blue-800 text-white px-6 py-4 flex justify-between items-center text-left font-semibold">
-                        Bagaimana jika saya tidak memahami materi saat belajar?
-                        <span class="faq-icon">⌄</span>
-                    </button>
-
-                    <div class="faq-content hidden bg-white px-6 py-5">
-                        <p class="text-gray-600">
-                            Mentor siap membantu dan materi bisa diulang kapan saja.
-                        </p>
-                    </div>
-                </div>
-
-            </div>
-
-
-
-            <!-- RIGHT -->
-            <div class="space-y-4">
-
-                <div class="rounded-xl overflow-hidden shadow-sm">
-                    <button onclick="toggleFaq(this)"
-                        class="faq-btn w-full bg-blue-800 text-white px-6 py-4 flex justify-between items-center text-left font-semibold">
-                        Apakah pembelajaran hanya berupa video?
-                        <span class="faq-icon">⌄</span>
-                    </button>
-
-                    <div class="faq-content hidden bg-white px-6 py-5">
-                        <p class="text-gray-600">
-                            Tidak. Ada quiz, project dan mentoring juga.
-                        </p>
-                    </div>
-                </div>
-
-
-                <!-- OPEN -->
-                <div class="rounded-xl overflow-hidden shadow-sm">
-                    <button onclick="toggleFaq(this)"
-                        class="faq-btn w-full bg-blue-800 text-white px-6 py-4 flex justify-between items-center text-left font-semibold">
-                        Apakah saya bisa membuat proyek sendiri?
-                        <span class="faq-icon rotate-180">⌄</span>
-                    </button>
-
-                    <div class="faq-content block bg-white px-6 py-5">
-                        <p class="text-gray-600 leading-relaxed">
-                            Ya, tentu! Setiap jalur pembelajaran dilengkapi dengan proyek
-                            yang bisa kamu kerjakan. Proyek ini dirancang agar kamu bisa menerapkan langsung apa yang dipelajari.
-                            <br><br>
-                            Hasil proyek ini juga bisa kamu gunakan sebagai portofolio untuk masa depan.
-                        </p>
-                    </div>
-                </div>
-
-
-                <div class="rounded-xl overflow-hidden shadow-sm">
-                    <button onclick="toggleFaq(this)"
-                        class="faq-btn w-full bg-blue-800 text-white px-6 py-4 flex justify-between items-center text-left font-semibold">
-                        Apakah saya bisa belajar kapan saja?
-                        <span class="faq-icon">⌄</span>
-                    </button>
-
-                    <div class="faq-content hidden bg-white px-6 py-5">
-                        <p class="text-gray-600">
-                            Bisa, akses kelas fleksibel 24 jam.
-                        </p>
-                    </div>
-                </div>
-
-
-                <div class="rounded-xl overflow-hidden shadow-sm">
-                    <button onclick="toggleFaq(this)"
-                        class="faq-btn w-full bg-blue-800 text-white px-6 py-4 flex justify-between items-center text-left font-semibold">
-                        Apakah saya akan mendapatkan sertifikat?
-                        <span class="faq-icon">⌄</span>
-                    </button>
-
-                    <div class="faq-content hidden bg-white px-6 py-5">
-                        <p class="text-gray-600">
-                            Ya, sertifikat digital tersedia setelah selesai kelas.
-                        </p>
-                    </div>
-                </div>
-
-
-                <div class="rounded-xl overflow-hidden shadow-sm">
-                    <button onclick="toggleFaq(this)"
-                        class="faq-btn w-full bg-blue-800 text-white px-6 py-4 flex justify-between items-center text-left font-semibold">
-                        Apa keunggulan CRYGLE Academy dibanding platform lain?
-                        <span class="faq-icon">⌄</span>
-                    </button>
-
-                    <div class="faq-content hidden bg-white px-6 py-5">
-                        <p class="text-gray-600">
-                            Fokus ke project nyata dan portfolio.
-                        </p>
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-
+<section style="background:#F8FAFD;" class="px-6 lg:px-8 py-16">
+  <div class="max-w-7xl mx-auto">
+    <div style="text-align:center;margin-bottom:3rem;">
+      <h2 style="font-size:1.75rem;font-weight:800;color:#1B4F9B;margin-bottom:.5rem;">Frequently Asked Questions</h2>
+      <p style="color:#6B7280;font-size:.9rem;">Masih bingung? Kami bantu jawab di sini.</p>
     </div>
+
+    @php
+    $faqs = [
+      ['Apakah Crygle Academy cocok untuk pemula?', 'Sangat cocok. <strong>CRYGLE</strong> Academy dirancang khusus untuk pemula dari tingkat SD hingga SMK. Materi disusun secara bertahap dari dasar hingga lanjutan dengan penjelasan yang mudah dipahami.', true],
+      ['Apakah pembelajaran hanya berupa video?', '', false],
+      ['Saya belum pernah belajar coding, robotik dan desain, apakah bisa ikut?', '', false],
+      ['Apakah saya bisa membuat proyek sendiri?', 'Ya, Tentu! Setiap jalur pembelajaran dilengkapi dengan proyek yang bisa kamu kerjakan. Proyek ini dirancang agar kamu bisa menerapkan langsung apa yang sudah dipelajari.<br><br>Hasil proyek ini juga bisa kamu gunakan sebagai portofolio untuk masa depan.', true],
+      ['Apa saja yang bisa saya pelajari di CRYGLE Academy?', '', false],
+      ['Apakah saya bisa belajar kapan saja?', '', false],
+      ['Bagaimana jika saya tidak memahami materi saat belajar?', '', false],
+      ['Apakah saya akan mendapatkan sertifikat?', '', false],
+      ['', 'Apa keunggulan CRYGLE Academy dibanding platform lain?', false],
+    ];
+    @endphp
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;" class="lg:grid-cols-2">
+      @php $col1 = array_filter($faqs, fn($k) => $k % 2 == 0, ARRAY_FILTER_USE_KEY);
+           $col2 = array_filter($faqs, fn($k) => $k % 2 == 1, ARRAY_FILTER_USE_KEY); @endphp
+
+      <div class="space-y-3">
+        @foreach($col1 as $i => $faq)
+        @if($faq[0])
+        <div>
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <span>{{ $faq[0] }}</span>
+            <i class="bi-chevron-{{ $faq[2] ? 'up' : 'down' }} text-sm transition-transform"></i>
+          </div>
+          @if($faq[2])
+          <div style="padding:1rem 1.25rem;font-size:.875rem;color:#374151;line-height:1.7;border:1px solid #E5E7EB;border-top:none;border-radius:0 0 8px 8px;background:#fff;">
+            {!! $faq[1] !!}
+          </div>
+          @endif
+        </div>
+        @endif
+        @endforeach
+      </div>
+
+      <div class="space-y-3">
+        @foreach($col2 as $i => $faq)
+        @if($faq[0] || $faq[1])
+        <div>
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <span>{{ $faq[0] ?: $faq[1] }}</span>
+            <i class="bi-chevron-{{ $faq[2] ? 'up' : 'down' }} text-sm"></i>
+          </div>
+          @if($faq[2] && $faq[1])
+          <div style="padding:1rem 1.25rem;font-size:.875rem;color:#374151;line-height:1.7;border:1px solid #E5E7EB;border-top:none;border-radius:0 0 8px 8px;background:#fff;">
+            {!! $faq[1] !!}
+          </div>
+          @endif
+        </div>
+        @endif
+        @endforeach
+      </div>
+    </div>
+  </div>
+  
 </section>
 
 

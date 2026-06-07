@@ -14,21 +14,22 @@ class TransactionController extends Controller
         abort_if(!$course->isPublished(), 404);
 
         if ($user->isEnrolled($course))
-            return back()->with('info', 'Kamu sudah terdaftar di course ini.');
+            return back()->with('info', 'Kamu sudah terdaftar di kelas ini.');
 
-        // Free course — langsung enroll
+        // Free course → langsung enroll
         if ($course->isFree()) {
-            Enrollment::create([
+            $enrollment = Enrollment::create([
                 'user_id'     => $user->id,
                 'course_id'   => $course->id,
                 'status'      => 'active',
                 'amount_paid' => 0,
                 'enrolled_at' => now(),
             ]);
-            return redirect()->route('dashboard')->with('success', "Berhasil mendaftar ke \"{$course->title}\"! 🎉");
+            return redirect()->route('payment.success.page', $enrollment)
+                             ->with('success', "Berhasil mendaftar ke \"{$course->title}\"! 🎉");
         }
 
-        // Cek apakah ada transaksi pending
+        // Cek pending transaction
         $existing = Transaction::where('user_id', $user->id)
                                 ->where('course_id', $course->id)
                                 ->where('status','pending')->first();
@@ -49,30 +50,46 @@ class TransactionController extends Controller
     {
         abort_if($transaction->user_id !== auth()->id(), 403);
         $transaction->load('course','user');
-        return view('payment', compact('transaction'));
+        return view('payment.checkout', compact('transaction'));
     }
 
     public function confirm(Request $request, Transaction $transaction)
     {
         abort_if($transaction->user_id !== auth()->id(), 403);
 
-        $request->validate([
-            'payment_method' => 'required|string',
-        ]);
+        $request->validate(['payment_method' => 'required|string']);
 
-        // Simulasi konfirmasi — di produksi ini terhubung ke payment gateway
+        // Update transaksi
         $transaction->update([
             'status'         => 'paid',
             'payment_method' => $request->payment_method,
-            'gateway_ref'    => 'SIM-' . strtoupper(substr(md5(uniqid()), 0, 8)),
+            'gateway_ref'    => 'CRY-' . strtoupper(substr(md5(uniqid()), 0, 8)),
         ]);
 
         // Buat enrollment
-        Enrollment::firstOrCreate(
+        $enrollment = Enrollment::firstOrCreate(
             ['user_id' => $transaction->user_id, 'course_id' => $transaction->course_id],
             ['status' => 'active', 'amount_paid' => $transaction->amount, 'enrolled_at' => now()]
         );
 
-        return redirect()->route('dashboard')->with('success', "Pembayaran berhasil! Kamu sudah bisa mulai belajar. 🎉");
+        // Redirect ke halaman sukses
+        return redirect()->route('payment.success.page', $enrollment)
+                         ->with('success', 'Pembayaran berhasil! Selamat belajar! 🎉');
+    }
+
+    // Halaman processing (tampilkan animasi singkat lalu auto-submit)
+    public function processing(Transaction $transaction)
+    {
+        abort_if($transaction->user_id !== auth()->id(), 403);
+        $transaction->load('course');
+        return view('payment.processing', compact('transaction'));
+    }
+
+    // Halaman sukses setelah enroll
+    public function success(Enrollment $enrollment)
+    {
+        abort_if($enrollment->user_id !== auth()->id(), 403);
+        $enrollment->load('course.sections.lessons','course.category');
+        return view('payment.success', compact('enrollment'));
     }
 }

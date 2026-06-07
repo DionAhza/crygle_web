@@ -1,52 +1,55 @@
 @if($enrollment)
-  {{-- Already enrolled --}}
   @php $next = $enrollment->nextLesson(); $first = $course->sections->first()?->lessons->first(); $target = $next ?? $first; @endphp
   @if($target)
   <a href="{{ route('learn.lesson', [$enrollment, $target]) }}"
-     class="block w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3.5 rounded-xl text-center transition mb-2 text-sm">
+     style="display:block;width:100%;background:#22C55E;color:#fff;font-weight:700;padding:1rem;border-radius:50px;text-decoration:none;text-align:center;font-size:.95rem;transition:background .2s;margin-bottom:.875rem;"
+     onmouseenter="this.style.background='#16A34A'" onmouseleave="this.style.background='#22C55E'">
     {{ $next ? '▶ Lanjut Belajar' : '🔁 Ulangi Course' }}
   </a>
   @endif
   @php $pct = $enrollment->progressPercent(); @endphp
   <div>
-    <div class="flex justify-between text-xs text-slate-500 mb-1">
-      <span>Progress</span><span class="font-semibold text-blue-700">{{ $pct }}%</span>
+    <div style="display:flex;justify-content:space-between;font-size:.8rem;margin-bottom:.375rem;">
+      <span style="color:#6B7280;font-weight:600;">Progress</span>
+      <span style="color:#1B4F9B;font-weight:700;">{{ $pct }}%</span>
     </div>
-    <div class="w-full bg-slate-100 rounded-full h-2">
-      <div class="bg-blue-600 h-2 rounded-full transition-all" style="width:{{ $pct }}%"></div>
+    <div style="height:6px;background:#E5E7EB;border-radius:3px;overflow:hidden;">
+      <div style="height:100%;background:#1B4F9B;border-radius:3px;width:{{ $pct }}%;"></div>
     </div>
   </div>
 
-@elseif($hasPending ?? false)
-  {{-- Pending payment --}}
+@elseif(isset($hasPending) && $hasPending)
   @php $pendingTx = auth()->user()->transactions()->where('course_id',$course->id)->where('status','pending')->first(); @endphp
   @if($pendingTx)
   <a href="{{ route('payment', $pendingTx) }}"
-     class="block w-full bg-amber-500 hover:bg-amber-600 text-white font-bold py-3.5 rounded-xl text-center transition mb-2 text-sm">
+     style="display:block;width:100%;background:#F59E0B;color:#fff;font-weight:700;padding:1rem;border-radius:50px;text-decoration:none;text-align:center;font-size:.95rem;transition:background .2s;"
+     onmouseenter="this.style.background='#D97706'" onmouseleave="this.style.background='#F59E0B'">
     ⏳ Selesaikan Pembayaran
   </a>
   @endif
 
 @elseif(auth()->check())
-  {{-- Checkout --}}
   <form action="{{ route('checkout', $course) }}" method="POST">
     @csrf
-    <button class="w-full bg-blue-700 hover:bg-blue-800 text-white font-bold py-3.5 rounded-xl transition mb-2 text-sm shadow-md shadow-blue-200">
-      {{ $course->isFree() ? '🎉 Daftar Gratis Sekarang' : '🛒 Daftar Sekarang' }}
+    <button type="submit"
+            style="width:100%;background:#1B4F9B;color:#fff;font-weight:700;padding:1rem;border-radius:50px;border:none;cursor:pointer;font-size:.95rem;transition:background .2s;"
+            onmouseenter="this.style.background='#143d7a'" onmouseleave="this.style.background='#1B4F9B'">
+      {{ $course->isFree() ? '🎉 Mulai Belajar' : '🛒 Daftar Sekarang' }}
     </button>
   </form>
   @if(!$course->isFree())
-    <p class="text-center text-xs text-slate-400">Garansi uang kembali 30 hari</p>
+  <p style="text-align:center;font-size:.78rem;color:#9CA3AF;margin-top:.625rem;">Garansi uang kembali 30 hari</p>
   @endif
 
 @else
-  {{-- Guest --}}
   <a href="{{ route('login') }}"
-     class="block w-full bg-blue-700 hover:bg-blue-800 text-white font-bold py-3.5 rounded-xl text-center transition mb-2 text-sm">
+     style="display:block;width:100%;background:#1B4F9B;color:#fff;font-weight:700;padding:1rem;border-radius:50px;text-decoration:none;text-align:center;font-size:.95rem;transition:background .2s;margin-bottom:.5rem;"
+     onmouseenter="this.style.background='#143d7a'" onmouseleave="this.style.background='#1B4F9B'">
     Masuk untuk Mendaftar
   </a>
   <a href="{{ route('register') }}"
-     class="block w-full border-2 border-blue-600 text-blue-600 hover:bg-blue-50 font-semibold py-3 rounded-xl text-center transition text-sm">
+     style="display:block;width:100%;border:2px solid #1B4F9B;color:#1B4F9B;font-weight:700;padding:.875rem;border-radius:50px;text-decoration:none;text-align:center;font-size:.875rem;transition:all .2s;"
+     onmouseenter="this.style.background='#EEF4FF'" onmouseleave="this.style.background='transparent'">
     Daftar Gratis
   </a>
 @endif
